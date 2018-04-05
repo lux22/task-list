@@ -1,0 +1,40 @@
+.no-margin{
+    margin:0px auto !important;
+}
+
+.bg-blue-mixed
+{
+    background: #405a81;
+}
+
+i.icon-color
+{
+    color: #3bffc0;
+    opacity: 1 !important;
+}
+
+.padding-left-0{
+    padding-left:0px;
+}
+
+.padding-right-15{
+    padding-right:15px !important;
+}
+
+@media screen and (max-width:768px)
+{
+    .collapse-nav
+    {
+        position: absolute;
+        margin: 0px;
+        left: 0;
+        right: 0;
+        top:50px;
+    }
+    
+    .no-margin-navbar-nav
+    {
+        margin: 0px;
+    }
+    
+}
