@@ -1,2 +1,7 @@
 # Tasklist
-A simple tasklist programm using IIFE ( Immediately Invoked Function Expression) 
+Add a new task.<br>
+Search tasks within tasklist.<br>
+Persist task to localstorage.<br>
+Deleting task from localstorage and from the HTML page.
+
+
