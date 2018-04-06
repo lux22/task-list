@@ -30,7 +30,7 @@
 
      //Input data 
      let _data;
-     let _taskindex;
+     
 
      //Get current time and date of task.
      let getTimeDate = function () {
@@ -97,6 +97,7 @@
      let _taskLocal;
      let _taskData;
      let _localtaskdelete; 
+     let _taskindex;
 
      //Checking tasks in localstorage
      let checklocalstorage = function () {
@@ -137,10 +138,11 @@
      }
 
      //Storing task data in localstorage.
-     var taskStorage = function () {
+     var taskStorage = function (data) {
          checklocalstorage();
+         _taskindex = data;
          let taskObject = {
-             "taskID":_taskindex,
+             "taskID":Number(_taskindex),
              "task": _taskData,
              "taskDate": fntaskUI.taskTime.taskdate,
              "taskHour": fntaskUI.taskTime.taskHour,
@@ -156,9 +158,9 @@
      let deletlocaltask = function () {
          checklocalstorage();
          _taskLocal.forEach(function (task, index) {
-             if(Number(_localtaskdelete) === task['taskID'])
+             if(_localtaskdelete === task['taskID'])
              {
-                _taskLocal.splice(index,5);
+                _taskLocal.splice(index,1);
              }
          })
          localStorage.setItem('tasks', JSON.stringify(_taskLocal));
@@ -176,8 +178,7 @@
          taskLocalStorage: function (data,index) {
              if (data != null) {
                  _taskData = data;
-                 _taskindex = index;
-                 taskStorage();
+                 taskStorage(index);
              } else {
                  console.log('Cannot Insert to LocalStorage without data');
              }
@@ -192,7 +193,7 @@
             clearlocaltask();
          },
 
-         getTask: function () {
+         gettask: function () {
              taskLoaded();
          }
      }
@@ -212,7 +213,7 @@
 
      //setupeventlistner
      let eventListnerInit = function () {
-         document.addEventListener('DOMContentLoaded', taskstorage.getTask);
+          document.addEventListener('DOMContentLoaded', taskstorage.gettask);
          _addtask.addEventListener('click', getitems);
          _deletetask.addEventListener('click', deleteItems);
          _cleartask.addEventListener('click', clearAllList);
@@ -230,7 +231,6 @@
                  _taskindex = _listgroup.length;
                  UIrender.renderTask(_task_items, _taskindex); //Rendering task data to HTML //   
                  taskstorage.taskLocalStorage(_task_items,_taskindex); // Adding task to localstorage.//
-                 
              }
              
          } else {
@@ -244,8 +244,8 @@
          if (e.target.parentElement.className.includes('btn-delete')) {
              e.target.parentElement.parentElement.parentElement.parentElement.remove();
              _taskid = e.target.parentElement.parentElement.parentElement.parentElement.getAttribute('task-id');
-             fntaskLocalStorage.deletelocaltask(_taskid);
          }
+         fntaskLocalStorage.deletelocaltask(Number(_taskid));
      }
 
      //Clear all tasklist
