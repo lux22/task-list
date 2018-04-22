@@ -31,7 +31,6 @@
      //Input data 
      let _data;
      
-
      //Get current time and date of task.
      let getTimeDate = function () {
          taskAddedDate = new Date();
